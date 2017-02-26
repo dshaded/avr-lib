@@ -3,6 +3,9 @@ mmcu       ?= atmega8
 fuseClock  ?= 100kHz
 srcDirs    ?= src lib/src
 cflags     ?= -Os -Wall -Werror -Wextra
+#lfuse     := skipped
+#hfuse     := skipped
+#efuse     := skipped
 #prog      := default programmer from ~/.avrduderc
 #port      := not specified
 #progClock := programmer default
@@ -45,10 +48,12 @@ install: all fuse flash eeprom
 fuse: $(usedFuses)
 
 flash eeprom: % :out/%.hex
-	avrdude $(dudeFlags) -U $@:w:$<
+	@echo AvrDude writing $@ from $<
+	$(HIDE)avrdude $(dudeFlags) -U $@:w:$<
 
 $(usedFuses):
-	avrdude $(fuseFlags) -U $@:w:$($@):m
+	@echo AvrDude setting $@ to $($@)
+	$(HIDE)avrdude $(fuseFlags) -U $@:w:$($@):m
 
 
 #################### INTERNAL TARGETS ####################
