@@ -1,7 +1,6 @@
-lfuse ?= !!!changeme!!!
-hfuse ?= !!!changeme!!!
-efuse ?= !!!changeme!!!
-
+#lfuse     := skipped
+#hfuse     := skipped
+#efuse     := skipped
 #clock     := 8000000
 #mmcu      := atmega8
 #fuseClock := 100kHz

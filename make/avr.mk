@@ -1,6 +1,3 @@
-lfuse      ?= !!!changeme!!!
-hfuse      ?= !!!changeme!!!
-efuse      ?= !!!changeme!!!
 clock      ?= 8000000
 mmcu       ?= atmega8
 fuseClock  ?= 100kHz
@@ -25,15 +22,18 @@ endif
 
 HIDE := @
 TRASH := @
-ifeq ($(VERBOSE),1)
+ifeq ($(verbose),1)
   HIDE :=
 endif
-ifeq ($(VERBOSE),2)
+ifeq ($(verbose),2)
   HIDE :=
   TRASH :=
 endif
 
-.PHONY: all clean install fuse flash eeprom lfuse hfuse efuse mkdirs
+knownFuses := lfuse hfuse efuse
+usedFuses := $(filter $(knownFuses),$(.VARIABLES))
+
+.PHONY: all clean install fuse flash eeprom mkdirs $(knownFuses)
 
 all: out/objdump.txt out/flash.hex out/eeprom.hex
 
@@ -42,12 +42,12 @@ clean:
 
 install: all fuse flash eeprom
 
-fuse: lfuse hfuse efuse
+fuse: $(usedFuses)
 
 flash eeprom: % :out/%.hex
 	avrdude $(dudeFlags) -U $@:w:$<
 
-lfuse hfuse efuse:
+$(usedFuses):
 	avrdude $(fuseFlags) -U $@:w:$($@):m
 
 
