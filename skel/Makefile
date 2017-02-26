@@ -1,1 +1,14 @@
-include lib/make/avr.mk
+lfuse ?= !!!changeme!!!
+hfuse ?= !!!changeme!!!
+efuse ?= !!!changeme!!!
+
+#clock     := 8000000
+#mmcu      := atmega8
+#fuseClock := 100kHz
+#srcDirs   := src lib/src
+#cflags    := -Os -Wall -Werror -Wextra
+#prog      := default programmer from ~/.avrduderc
+#port      := not specified
+#progClock := programmer default
+
+include lib/make/*.mk
