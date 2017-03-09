@@ -10,7 +10,7 @@ cflags     ?= -Os -Wall -Werror -Wextra
 #port      := not specified
 #progClock := programmer default
 
-cflagsReal := $(cflags) -g -DF_CPU=$(clock) -mmcu=$(mmcu) -iquotelib/src
+cflagsReal := $(cflags) -ggdb -DF_CPU=$(clock) -mmcu=$(mmcu) -iquotelib/src
 dudeFlags := -p $(mmcu)
 ifdef prog
   dudeFlags += -c $(prog)
@@ -76,7 +76,7 @@ build/a.out: $(objects)
 	$(HIDE)avr-gcc $(cflagsReal) -o $@ $^
 
 out/objdump.txt: build/a.out
-	$(TRASH)avr-objdump -C -d $< > $@
+	$(TRASH)avr-objdump -C -S $< > $@
 
 out/flash.hex: build/a.out
 	$(TRASH)avr-objcopy -j .text -O ihex $< $@
