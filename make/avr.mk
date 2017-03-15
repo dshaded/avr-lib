@@ -79,7 +79,7 @@ out/objdump.txt: build/a.out
 	$(TRASH)avr-objdump -C -S $< > $@
 
 out/flash.hex: build/a.out
-	$(TRASH)avr-objcopy -j .text -O ihex $< $@
+	$(TRASH)avr-objcopy -j .text -j .data -O ihex $< $@
 
 out/eeprom.hex: build/a.out
 	$(TRASH)avr-objcopy -j .eeprom -O ihex $< $@
