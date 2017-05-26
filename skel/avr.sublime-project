@@ -9,12 +9,8 @@
 			"path": "/usr/avr/include"
 		},
 		{
-			"name": "include-avr-gcc",
-			"path": "/usr/lib/gcc/avr/6.3.0/include"
-		},
-		{
-			"name": "include-avr-gcc-fixed",
-			"path": "/usr/lib/gcc/avr/6.3.0/include-fixed"
+			"name": "avr-gcc",
+			"path": "/usr/lib/gcc/avr/"
 		}
 	]
 }
