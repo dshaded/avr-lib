@@ -1,5 +1,6 @@
-// Laserwar MilesTag2 protocol constants
+#include <inttypes.h>
 
+// Laserwar MilesTag2 protocol constants
 #define LT_VAL_1   (0x0)
 #define LT_VAL_2   (0x1)
 #define LT_VAL_4   (0x2)
@@ -107,3 +108,5 @@
 #define CMD_PLAYER_PAUSE(player_id_n127)     CMD_DUAL( LT_C_PLAYER_PAUSE     , player_id_n127 )
 #define CMD_PLAYER_KILL(player_id_n127)      CMD_DUAL( LT_C_PLAYER_KILL      , player_id_n127 )
 #define CMD_PLAYER_FULL_AMMO(player_id_n127) CMD_DUAL( LT_C_PLAYER_FULL_AMMO , player_id_n127 )
+
+void ltEmitCommand(volatile uint8_t* pwmRegister, const uint8_t* cmdPtr, const uint8_t pwmOnLevel, const uint8_t pwmOffLevel);
