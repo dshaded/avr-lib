@@ -47,7 +47,7 @@ install: all fuse flash eeprom
 
 fuse: $(usedFuses)
 
-flash eeprom: % :out/%.hex
+flash eeprom: % :out/%.hex out/objdump.txt
 	@echo AvrDude writing $@ from $<
 	$(HIDE)avrdude $(dudeFlags) -U $@:w:$<
 
