@@ -7,8 +7,9 @@ typedef struct lt_cmd_struct {
 	};
 	union {
 		struct {
-			uint8_t colorCode:2;
+			uint8_t :2;
 			uint8_t damageCode:4;
+			uint8_t colorCode:2;
 		};
 		uint8_t code2;
 	};
