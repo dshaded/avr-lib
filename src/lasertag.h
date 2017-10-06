@@ -17,7 +17,7 @@ typedef struct lt_cmd_struct {
 
 #define LT_SHOT_BITS 14
 #define LT_DUAL_BITS 24
-#define LT_DUAL_SIGNATURE 0xe8
+#define LT_DUAL_SIGNATURE 0xE8
 
 #define LT_IS_SHOT(cmd) (cmd.code1 < 0x80)
 #define LT_IS_DUAL(cmd) (cmd.code1 >= 0x80)
@@ -148,15 +148,14 @@ typedef struct lt_cmd_struct {
 #define LT_CMD_PLAYER_FULL_AMMO(player_id_n127) LT_CMD_DUAL( LT_C_PLAYER_FULL_AMMO , player_id_n127 )
 
 
-
 // Emit miles-tag command via preconfigured 56kHz pwm.
 void ltEmitCommand(
 	const lt_cmd_t cmd,
 	volatile uint8_t* pwmRegister,
 	const uint8_t pwmOnLevel,
-	const uint8_t pwmOffLevel
+	const uint8_t pwmOffLevel,
+	uint16_t (*microtime) ()
 );
 
-//MUST be called exactly once per 100us.
-//Returns true when lt command was fully received and stored intto result.
-bool onIrSensTimerInterrupt(bool isCarrierPresent, volatile lt_cmd_t* result);
+void ltGetReceivedCommand(volatile lt_cmd_t* command);
+bool ltOnIrPCI(bool carrierPresent, uint16_t microtime);
