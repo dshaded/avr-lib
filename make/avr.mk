@@ -38,7 +38,10 @@ usedFuses := $(filter $(knownFuses),$(.VARIABLES))
 
 .PHONY: all clean install fuse flash eeprom mkdirs $(knownFuses)
 
-all: out/objdump.txt out/flash.hex out/eeprom.hex
+all: out/objdump.txt out/flash.hex out/eeprom.hex stats
+
+stats: build/a.out
+	avr-size -C --mcu=$(mmcu) build/a.out
 
 clean:
 	$(TRASH)rm -rf out build
