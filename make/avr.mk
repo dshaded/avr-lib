@@ -10,7 +10,7 @@ cflags     ?= -Os -Wall -Werror -Wextra
 #port      := not specified
 #progClock := programmer default
 
-cflagsReal := $(cflags) -ggdb -DF_CPU=$(clock) -mmcu=$(mmcu) -iquotelib/src
+cflagsReal := $(cflags) -g -DF_CPU=$(clock) -mmcu=$(mmcu) -iquotelib/src
 dudeFlags := -p $(mmcu)
 ifdef prog
   dudeFlags += -c $(prog)
@@ -61,7 +61,7 @@ $(usedFuses):
 
 #################### INTERNAL TARGETS ####################
 sourceDirs != find $(srcDirs) -type d
-sources != find $(srcDirs) -type f -and \( -name '*.[csS]' -or -name '*.sx' \)
+sources != find $(srcDirs) -type f -and \( -name '*.[csS]' -or -name '*.sx' -or -name '*.cpp' \)
 objects := $(addsuffix .o,$(addprefix build/,$(sources)))
 makeDeps := $(addsuffix .mk,$(addprefix build/,$(sources)))
 
