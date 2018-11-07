@@ -10,7 +10,7 @@ cflags     ?= -Os -Wall -Werror -Wextra
 #port      := not specified
 #progClock := programmer default
 
-cflagsReal := $(cflags) -g -DF_CPU=$(clock) -mmcu=$(mmcu) -iquotelib/src
+cflagsReal := $(cflags) -ggdb -DF_CPU=$(clock) -mmcu=$(mmcu) -iquotelib/src
 dudeFlags := -p $(mmcu)
 ifdef prog
   dudeFlags += -c $(prog)

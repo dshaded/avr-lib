@@ -1,6 +1,7 @@
+#pragma once
 
-#define IS_LOW(value, bit) (!((value) & (1 << (bit))))
-#define IS_HIGH(value, bit) (!IS_LOW(value, bit))
+#define IS_LOW(value, bit) (((value) & (1 << (bit))) == 0)
+#define IS_HIGH(value, bit) (((value) & (1 << (bit))) != 0)
 
 #define SET_BIT(port, bit, state) do { \
 	if(state) { \
