@@ -2,7 +2,7 @@ clock      ?= 8000000
 mmcu       ?= atmega8
 fuseClock  ?= 100kHz
 srcDirs    ?= src lib/src
-cflags     ?= -Os -Wall -Werror -Wextra
+cflags     ?= -Os -Wall -Werror -Wextra -Wno-error=unused-parameter
 #lfuse     := skipped
 #hfuse     := skipped
 #efuse     := skipped
@@ -60,8 +60,8 @@ $(usedFuses):
 
 
 #################### INTERNAL TARGETS ####################
-sourceDirs != find $(srcDirs) -type d
-sources != find $(srcDirs) -type f -and \( -name '*.[csS]' -or -name '*.sx' -or -name '*.cpp' \)
+sourceDirs != find -L $(srcDirs) -type d
+sources != find -L $(srcDirs) -type f -and \( -name '*.[csS]' -or -name '*.sx' -or -name '*.cpp' \)
 objects := $(addsuffix .o,$(addprefix build/,$(sources)))
 makeDeps := $(addsuffix .mk,$(addprefix build/,$(sources)))
 
