@@ -14,6 +14,7 @@
 
 #define ARRAY_SIZE(array) (sizeof(array) / sizeof(array[0]))
 
+#define UNUSED(x) (void)(x)
 
 #define GET_MACRO(_1, _2, _3, _4, _5, _6, _7, _8, NAME, ...) NAME
 #define BV(...) GET_MACRO(__VA_ARGS__, _BV8, _BV7, _BV6, _BV5, _BV4, _BV3, _BV2, _BV1)(__VA_ARGS__)
