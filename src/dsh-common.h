@@ -5,12 +5,13 @@
 
 #define SET_BIT(port, bit, state) do { \
 	if(state) { \
-		port |= 1 << (bit); \
+		port |= 1U << (bit); \
 	} else  { \
-		port &= ~ (1 << (bit)); \
+		port &= ~ (1U << (bit)); \
 	} \
 } while(0)
 
+#define PACKED_ENUM enum __attribute__((__packed__))
 
 #define ARRAY_SIZE(array) (sizeof(array) / sizeof(array[0]))
 
