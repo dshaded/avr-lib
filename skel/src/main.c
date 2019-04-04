@@ -4,21 +4,12 @@
 #include <util/delay.h>
 #include <stdbool.h>
 
-#include "lasertag.h"
 #include "dsh-common.h"
 
 
 /************************************ MACROS ************************************/
 #define CONST_1 123              // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 #define CONST_2 (CONST_1 >> 1)   // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-/************************************ DATA ************************************/
-static const uint8_t LASERTAG_CMD_1[] = CMD_SIMPLE(LT_NEW_GAME); // XXXXXXXXXXXXXXXXXXXXX
-static const uint8_t LASERTAG_CMD_2[] = CMD_SIMPLE(LT_KILL);     // XXXXXXXXXXXXXXXXXXXXX
-static const uint8_t* const LASERTAG_COMMANDS[] = {              // XXXXXXXXXXXXXXXXXXXXX
-	LASERTAG_CMD_1, LASERTAG_CMD_2                               // XXXXXXXXXXXXXXXXXXXXX
-};                                                               // XXXXXXXXXXXXXXXXXXXXX
 
 
 /************************************ VARS ************************************/
@@ -31,7 +22,6 @@ static void hwInit();
 
 static void waitInterrupt();                                                // XXXXXXXXXX
 static uint16_t intFunction(uint8_t param1);                                // XXXXXXXXXX
-static void lasertagCmdFunction(const uint8_t* cmdPointer, uint8_t param);  // XXXXXXXXXX
 
 
 /************************************ INTERRUPTS ************************************/
@@ -65,7 +55,6 @@ int main() {
 		staticLocalVar = intFunction(localVar);
 		boolVar = staticLocalVar == 888;
 		if(boolVar) {
-			lasertagCmdFunction(LASERTAG_COMMANDS[0], 1);
 			_delay_ms(2000);
 		}
 	}
@@ -75,10 +64,6 @@ int main() {
 uint16_t intFunction(uint8_t param1) {  //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	return ADC * param1;                //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 }                                       //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-void lasertagCmdFunction(const uint8_t* cmdPointer, uint8_t param) {  //XXXXXXXXXXXXXXXXX
-	moduleVar = cmdPointer[param];                                    //XXXXXXXXXXXXXXXXX
-}                                                                     //XXXXXXXXXXXXXXXXX
 
 void waitInterrupt() {
 	sleep_enable();
