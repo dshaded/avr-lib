@@ -1,5 +1,6 @@
 clock      ?= 8000000
 mmcu       ?= atmega8
+mmcudef    ?= $(mmcu)
 fuseClock  ?= 100kHz
 srcDirs    ?= src lib/src
 cflags     ?= -Os -Wall -Werror -Wextra
@@ -10,7 +11,7 @@ cflags     ?= -Os -Wall -Werror -Wextra
 #port      := not specified
 #progClock := programmer default
 
-cflagsReal := $(cflags) -ggdb -DF_CPU=$(clock) -mmcu=$(mmcu) -iquotelib/src
+cflagsReal := $(cflags) -ggdb -DF_CPU=$(clock) -mmcu=$(mmcudef) -iquotelib/src
 dudeFlags := -p $(mmcu)
 ifdef prog
   dudeFlags += -c $(prog)

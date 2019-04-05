@@ -3,6 +3,7 @@
 #efuse     := skipped
 #clock     := 8000000
 #mmcu      := atmega8
+#mmcudef   := $(mmcu)
 #fuseClock := 100kHz
 #srcDirs   := src lib/src
 #cflags    := -Os -Wall -Werror -Wextra
